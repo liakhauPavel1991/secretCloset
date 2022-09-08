@@ -1,15 +1,17 @@
 package tests;
 
 import org.junit.jupiter.api.Test;
-import steps.DashboardSteps;
+import steps.MainScreenSteps;
+import steps.ProductSteps;
+import steps.SellerSteps;
 
 public class DashboardTest extends BaseTest {
 
     @Test
     public void verifyDiscountAndSellerInfo() {
-        DashboardSteps.selectRandomCity();
-        DashboardSteps.verifyProductPriceWithDiscount();
-        DashboardSteps.verifySellerInfo();
+        MainScreenSteps.selectRandomCity();
+        ProductSteps.verifyProductPriceWithDiscount();
+        SellerSteps.verifySellerInfo();
 
 //        1	Click on city label
 

@@ -7,9 +7,7 @@ import aquality.appium.mobile.elements.interfaces.ITextBox;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import tools.utils.RandomUtils;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SelectCityScreen extends BaseScreen {
     private static final By SEARCH_TEXT_BOX_BY = By.id("com.zdv.secretcloset:id/etSearchTest");
@@ -25,10 +23,6 @@ public class SelectCityScreen extends BaseScreen {
         citiesTextBox.type(countryName);
     }
 
-    public void clearCityTextBox() {
-        citiesTextBox.clear();
-    }
-
     public String getTextFromCityTextBox() {
         return citiesTextBox.getText();
     }
@@ -36,13 +30,6 @@ public class SelectCityScreen extends BaseScreen {
     private List<ILabel> getCitiesList() {
         AqualityServices.getConditionalWait().waitFor(ExpectedConditions.elementToBeClickable(CITIES_LIST_BY));
         return getElementFactory().findElements(CITIES_LIST_BY, ElementType.LABEL);
-    }
-
-    public List<String> getCitiesListAsString() {
-        return getCitiesList()
-                .stream()
-                .map(ILabel::getText)
-                .collect(Collectors.toList());
     }
 
     public String getRandomCityNameFromList() {

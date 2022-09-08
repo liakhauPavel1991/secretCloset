@@ -101,12 +101,12 @@ public class Seller {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Seller seller = (Seller) o;
-        return rate == seller.rate && rating == seller.rating && likes == seller.likes && name.equals(seller.name) && Objects.equals(time, seller.time) && city.equals(seller.city);
+        return name.equals(seller.name) && city.equals(seller.city);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, rate, time, rating, likes, city);
+        return Objects.hash(name, city);
     }
 
     @Override
@@ -123,4 +123,12 @@ public class Seller {
                 ", member='" + member + '\'' +
                 '}';
     }
+
+    public String comparableInfo() {
+        return "Seller{" +
+                "name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
+
 }

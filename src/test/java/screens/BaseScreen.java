@@ -11,8 +11,6 @@ public abstract class BaseScreen extends Screen {
         super(locator, screenName);
         ILabel screen = getElementFactory().getLabel(locator, screenName);
         AqualityServices.getConditionalWait().waitFor(driver -> screen.state().isExist());
-        System.out.println(locator);
-        System.out.println(screen.state().isExist());
     }
 
 }

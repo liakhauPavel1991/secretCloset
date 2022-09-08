@@ -1,13 +1,9 @@
 package screens;
 
 import aquality.appium.mobile.elements.interfaces.ILabel;
+import models.Product;
 import models.Seller;
 import org.openqa.selenium.By;
-import tools.utils.RegExpUtils;
-import tools.constants.Splitters;
-import tools.constants.StringConstants;
-import java.util.Arrays;
-import java.util.NoSuchElementException;
 
 public class ProductScreen extends BaseScreen {
     private static final By BUY_BUTTON_BY = By.id("com.zdv.secretcloset:id/rlBuyButton");
@@ -27,57 +23,16 @@ public class ProductScreen extends BaseScreen {
         super(BUY_BUTTON_BY, "Select city screen");
     }
 
-    public String getProductBrandName() {
-        return productBrandLabel.getText();
+    public Product getProductModel() {
+        Product product = new Product();
+        product.setBrand(productBrandLabel.getText());
+        product.setDiscount(discountLabel.getText());
+        product.setFinalPrice(finalPriceLabel.getText());
+        product.setOriginalPrice(originalPriceLabel.getText());
+        return product;
     }
 
-    public int getOriginalPriseValue() {
-        return Integer.parseInt(
-                Arrays.stream(originalPriceLabel.getText()
-                .trim()
-                .split(Splitters.SPACE))
-                .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("Original price should contain price value and price currency")));
-    }
-
-    public String getOriginalPriceCurrency() {
-        return Arrays.stream(
-                originalPriceLabel.getText()
-                .trim()
-                .split(Splitters.SPACE))
-                .reduce((first, second) -> second)
-                .orElseThrow(() -> new NoSuchElementException("Original price contain price value and price currency"));
-    }
-
-    public int getFinalPriseValue() {
-        return Integer.parseInt(
-                Arrays.stream(finalPriceLabel.getText()
-                .trim()
-                .split(Splitters.SPACE))
-                .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("Final price should contain price value and price currency")));
-    }
-
-    public String getFinalPriceCurrency() {
-        return Arrays.stream(
-               finalPriceLabel.getText()
-               .trim()
-               .split(Splitters.SPACE))
-               .reduce((first, second) -> second)
-               .orElseThrow(() -> new NoSuchElementException("Final price should contain price value and price currency"));
-    }
-
-    public int getDiscountLabelValue() {
-        return Integer.parseInt(
-                discountLabel.getText()
-                .replaceAll(RegExpUtils.ONLY_NUMBERS_AND_LETTERS, StringConstants.EMPTY_STRING));
-    }
-
-    public String getDiscountText() {
-        return discountLabel.getText();
-    }
-
-    public Seller getSellerFromProductScreen() {
+    public Seller getSellerModel() {
         Seller seller = new Seller();
         seller.setName(sellerNameLabel.getText())
                 .setRate(sellerResponseRateLabel.getText())

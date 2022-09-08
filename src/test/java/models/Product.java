@@ -5,6 +5,7 @@ import tools.exeptions.ListSizeException;
 import tools.utils.StringUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Product {
     private String brand;
@@ -72,6 +73,19 @@ public class Product {
 
     public boolean hasDiscount() {
         return this.discountPercentValue != 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return finalPrice == product.finalPrice && originalPrice == product.originalPrice && discountPercentValue == product.discountPercentValue && brand.equals(product.brand) && Objects.equals(finalPriceCurrency, product.finalPriceCurrency) && Objects.equals(originalPriceCurrency, product.originalPriceCurrency) && Objects.equals(discountPercentString, product.discountPercentString);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(brand, finalPrice, finalPriceCurrency, originalPrice, originalPriceCurrency, discountPercentValue, discountPercentString);
     }
 
     @Override
